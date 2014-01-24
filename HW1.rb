@@ -3,7 +3,7 @@ def test(name, input, exp_output, your_output)
 	puts(name + " ===================")
 	puts("input: " + input)
 	puts("expected output: " + exp_output.to_s + "| your_output: " + your_output.to_s)
-	puts(exp_output == your_output ? "Correct!" : "[Wrong!]")
+	puts(exp_output == your_output ? "+++++++ Correct!" : "------- Wrong!")
 end
 
 # Homework 1
@@ -52,9 +52,9 @@ def starts_with_consonant?(s)
 	# Code Here
 end
 
-test("starts_with_consonant(s) #1", "\"Amazing\"", false, starts_with_consonant("Amazing"))
-test("starts_with_consonant(s) #2", "\"grace\"", true, starts_with_consonant("grace"))
-test("starts_with_consonant(s) #3", "\"!!!\"", true, starts_with_consonant("!!!"))
+test("starts_with_consonant(s) #1", "\"Amazing\"", false, starts_with_consonant?("Amazing"))
+test("starts_with_consonant(s) #2", "\"grace\"", true, starts_with_consonant?("grace"))
+test("starts_with_consonant(s) #3", "\"!!!\"", true, starts_with_consonant?("!!!"))
 
 # Define a method binary_multiple_of_4?(s) that takes a string and returns true if the string represents a binary number that is a multiple of 4. NOTE: be sure it returns false if the string is not a valid binary number!
 def binary_multiple_of_4?(s)
