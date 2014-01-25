@@ -61,14 +61,15 @@ test("sum_to_n? #4", "[], 1", false, sum_to_n?([], 1))
 # 2.Check the documentation on String and Regexp as they could help tremendously with these exercises. :-)
 # Define a method hello(name) that takes a string representing a name and returns the string "Hello, " concatenated with the name.
 def hello(name)
-	# Code Here
+	return "Hello, " + name
 end
 
 test("hello(name) #1", "\"Stayman\"", "Hello, Stayman", hello("Stayman"))
 
 # Define a method starts_with_consonant?(s) that takes a string and returns true if it starts with a consonant and false otherwise. (For our purposes, a consonant is any letter other than A, E, I, O, U.)NOTE: be sure it works for both upper and lower case and for nonletters!
 def starts_with_consonant?(s)
-	# Code Here
+	non_consonant = ["A", "E", "I", "O", "U", "a", "e", "i", "o", "u"]
+	return !non_consonant.include?(s[0])
 end
 
 test("starts_with_consonant(s) #1", "\"Amazing\"", false, starts_with_consonant?("Amazing"))
@@ -77,7 +78,12 @@ test("starts_with_consonant(s) #3", "\"!!!\"", true, starts_with_consonant?("!!!
 
 # Define a method binary_multiple_of_4?(s) that takes a string and returns true if the string represents a binary number that is a multiple of 4. NOTE: be sure it returns false if the string is not a valid binary number!
 def binary_multiple_of_4?(s)
-	# Code Here	
+	if s.length < 3 then return false end
+	s[0..-3].split("").each do |x|
+		if !["0","1"].include?(x) then return false end
+	end
+	if s[-2..-1] != "00" then return false end
+	return true
 end
 
 test("binary_multiple_of_4?(s) #1", "\"not valid\"", false, binary_multiple_of_4?("not valid"))
@@ -87,6 +93,19 @@ test("binary_multiple_of_4?(s) #3", "\"1100\"", true, binary_multiple_of_4?("110
 # 3.Define a class BookInStock which represents a book with an isbn number, isbn, and price of the book as a floating-point number, price, as attributes. The constructor should accept the ISBN number (a string) as the first argument and price as second argument, and should raise ArgumentError (one of Ruby's built-in exception types) if the ISBN number is the empty string or if the price is less than or equal to zero. Include the proper getters and setters for these attributes. Include a method price_as_string that returns the price of the book with a leading dollar sign and trailing zeros, that is, a price of 20 should display as "$20.00" and a price of 33.8 should display as "$33.80".
 
 class BookInStock
-	# Code Here
+	attr_accessor :isbn, :price
+	def initialize(isbn, price)
+		if isbn == "" then raise ArgumentError, "ISBN shouldn't be an empty string" end
+		if price <= 0 then raise ArgumentError, "price should be greater than zero" end
+		@isbn = isbn
+		@price = price
+	end
+	
+	def price_as_string
+		return "$%.2f" % @price
+	end
 end
 
+bookInStock = BookInStock.new("testisbn1234567890", 12)
+puts bookInStock.isbn
+puts bookInStock.price_as_string
